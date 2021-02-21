@@ -1,5 +1,6 @@
-const yyyymmdd = (stringDate) => {
-  const date = new Date(stringDate)
+const yyyymmdd = () => {
+  let date = new Date()
+  // date.setDate(new Date().getDate() + 1)
   if (Object.prototype.toString.call(date) === '[object Date]') {
     if (isNaN(date.getTime())) {
       return null

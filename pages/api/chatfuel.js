@@ -1,7 +1,7 @@
 import yyyymmdd from '../../utils/yyyymmdd'
 
 export default async (req, res) => {
-  const date = yyyymmdd('02/19/2021')
+  const date = yyyymmdd()
 
   const response = await fetch(
     `http://data.nba.net/10s/prod/v1/${date}/scoreboard.json`
@@ -20,13 +20,12 @@ export default async (req, res) => {
     }
   })
 
-  const messages = formatedGames.map((game) => {
-    return {
-      text: `HOME: ${game.home.name} \n VS \n AWAY: ${game.away.name}`,
-    }
+  let text = ''
+  formatedGames.map((game) => {
+    text = `HOME: ${game.home.name} \nAWAY: ${game.away.name} \n\n` + text
   })
 
   res.status(200).json({
-    messages,
+    messages: [{ text }],
   })
 }
