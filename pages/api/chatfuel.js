@@ -20,10 +20,13 @@ export default async (req, res) => {
     }
   })
 
+  const messages = formatedGames.map((game) => {
+    return {
+      text: `HOME: ${game.home.name} \n VS \n AWAY: ${game.away.name}`,
+    }
+  })
+
   res.status(200).json({
-    messages: [
-      { text: 'Welcome to the Chatfuel Rockets!' },
-      { text: 'What are you up to?' },
-    ],
+    messages,
   })
 }
